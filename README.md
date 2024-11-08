@@ -10,23 +10,40 @@
 
 ## 5. We modify the Program.cs (eShop.AppHost project)
 
-## 6. We add the Catalog Pictures
+## 6. We add the Catalog Pictures (Catalog.API project)
+
 
 Folder Pics
 
-## 7. We add the database initialization data 
+## 7. We add the database initialization data (Catalog.API project)
+
 
 Folder Setup 
 
-## 8. We create the Data Models (Catalog.API project)
+## 8. We create the Data Models and CatalogOptions (Catalog.API project)
 
-Folder Model
+Folder Model and CatalogOptions.cs file
 
 ## 9. We create the CatalogContext (Catalog.API project)
 
 Folder Infrastructure
 
+## 10. We add the Services (Catalog.API project)
 
-## 10. We 
+Folder Services
 
-## 8. 
+## 11. We add the Apis Endpoints (Catalog.API project)
+
+Folder Apis
+
+## 12. We configure the Middleware (Catalog.API project)
+
+## 13. We add the Extensions (Catalog.API project)
+
+Extensions folder
+
+## 14. We configure appsettings.json (Catalog.API project)
+
+We add the database connection string
+
+## 15. We run the application and see the results
