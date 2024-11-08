@@ -1,49 +1,48 @@
 # Building 'eShop' from Zero to Hero: Lesson 1 – Catalog API with Aspire .NET 9
+## 1. Creating a New Aspire .NET 9 Application in Visual Studio 2022
+ 
+## 2. Renaming Project Structure for Clarity and Organization
 
-## 1. We create an Aspire .NET 9 application with Visual Studio 2022
-
-## 2. We rename the projects
-
-## 3. We delete the existing Blazor Web App
-
-## 4. We load the Nuget packages (eShop.AppHost project)
-
-## 5. We modify the Program.cs (eShop.AppHost project)
-
-## 6. We add the Catalog Pictures (Catalog.API project)
+## 3. Removing the Default Blazor Web App
 
 
-Folder Pics
-
-## 7. We add the database initialization data (Catalog.API project)
+## 4. Loading Required NuGet Packages for eShop.AppHost
 
 
-Folder Setup 
+## 5. Customizing Program.cs in eShop.AppHost
 
-## 8. We create the Data Models and CatalogOptions (Catalog.API project)
 
-Folder Model and CatalogOptions.cs file
+## 6. Adding Catalog Images to the Catalog.API Project
 
-## 9. We create the CatalogContext (Catalog.API project)
+(Folder: Pics)
 
-Folder Infrastructure
+## 7. Setting Up Initial Database Data for Catalog.API
 
-## 10. We add the Services (Catalog.API project)
+(Folder: Setup)
 
-Folder Services
+## 8. Creating Data Models and Configuring CatalogOptions in Catalog.API
 
-## 11. We add the Apis Endpoints (Catalog.API project)
+(Folder: Model, File: CatalogOptions.cs)
 
-Folder Apis
+## 9. Building the CatalogContext for Data Handling in Catalog.API
 
-## 12. We configure the Middleware (Catalog.API project)
+(Folder: Infrastructure)
 
-## 13. We add the Extensions (Catalog.API project)
+## 10. Implementing Core Services in Catalog.API
 
-Extensions folder
+(Folder: Services)
 
-## 14. We configure appsettings.json (Catalog.API project)
+## 11. Adding API Endpoints to Catalog.API for Catalog Functionality
 
-We add the database connection string
+(Folder: Apis)
 
-## 15. We run the application and see the results
+## 12. Configuring Middleware for Catalog.API
+
+## 13. Adding Extensions for Enhanced Functionality in Catalog.API
+
+(Folder: Extensions)
+
+## 14. Setting Up appsettings.json with Database Connection Details
+
+## 15. Running the Application to View Initial Results
+
