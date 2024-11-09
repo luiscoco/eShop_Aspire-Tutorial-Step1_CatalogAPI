@@ -72,11 +72,21 @@ We introduce the new API project name **Catalog.API**, and we save the file
 
 ![image](https://github.com/user-attachments/assets/fd80a70e-2811-4d2d-a23a-919bcd5c3577)
 
-## 4. Removing the Default Blazor Web App
-
 We double click on the Solutoin file and we open it with Visual Studio 2022
 
 ![image](https://github.com/user-attachments/assets/5b9e7310-91e4-4268-81e8-cbd64e654ab5)
+
+We have also to change the project reference in the eShop.AppHost project
+
+![image](https://github.com/user-attachments/assets/b38bb46d-775e-447e-80f3-080a3c9d26a4)
+
+We verify the new reference 
+
+![image](https://github.com/user-attachments/assets/efd41854-df73-4136-bc4d-251dbecba642)
+
+## 4. Removing the Default Blazor Web App
+
+
 
 We **remove** the **Blazor Web App** project from the eShop Solution
 
