@@ -1548,7 +1548,35 @@ public class CatalogOptions
 
 ## 18. Setting Up appsettings.json with Database Connection Details
 
-## 19. Running the Application to View Initial Results
+
+
+## 19. Create the Database and Tables (Migrations 
+
+We right click on the Catalog.API project and select the menu option **Set as StartUp Project**
+
+![image](https://github.com/user-attachments/assets/9bf912f8-6cf5-4969-8e47-791c47c674a3)
+
+![image](https://github.com/user-attachments/assets/7e81b4e2-1077-4f36-9f5d-012e3ee9651f)
+
+We open the **Package Manager Console**
+
+![image](https://github.com/user-attachments/assets/6c43872f-4cfb-4d02-ac8e-232abda4d212)
+
+We select the Catalog.API project
+
+![image](https://github.com/user-attachments/assets/c4b5ba3c-e2b7-41fb-ac56-937e0bf5e98d)
+
+We Add a Migration for creating the Database and Tables. We run this command:
+
+```
+Add-Migration DatabaseInitialization
+```
+
+
+
+We
+
+## 20. Running the Application to View Initial Results
 
 
 
