@@ -216,6 +216,10 @@ Inside the **Setup** folder we include the **catalog.json** file for Catalog dat
 
 ![image](https://github.com/user-attachments/assets/4e34f0b9-6e1a-4131-9991-96fd065ca854)
 
+If we double click on the **catalog.json** file we can review the content
+
+![image](https://github.com/user-attachments/assets/4f41bf69-bc17-4d63-9ec4-ece1600a3524)
+
 ## 10. Creating Data Models and Configuring CatalogOptions in Catalog.API
 
 (Folder: Model, File: CatalogOptions.cs)
