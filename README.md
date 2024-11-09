@@ -1,4 +1,4 @@
-# Building 'eShop' from Zero to Hero: Lesson 1 – Catalog API with Aspire .NET 9
+# Building 'eShop' from Zero to Hero: We create the Catalog API with Aspire .NET 9
 
 ## 1. eShop app architecture overview
 
