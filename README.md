@@ -964,7 +964,8 @@ public static class CatalogApi
 {
     public static IEndpointRouteBuilder MapCatalogApiV1(this IEndpointRouteBuilder app)
     {
-        var api = app.MapGroup("api/catalog").HasApiVersion(1.0);
+        //var api = app.MapGroup("api/catalog").HasApiVersion(1.0);
+        var api = app.MapGroup("api/catalog");
 
         // Routes for querying catalog items.
         api.MapGet("/items", GetAllItems);
@@ -1271,6 +1272,11 @@ public static class CatalogApi
         Path.Combine(contentRootPath, "Pics", pictureFileName);
 }
 ```
+
+**IMPORTANT NOTE:** we remove the API Version from the **CatalogApi.cs** file
+
+![image](https://github.com/user-attachments/assets/6c512f6f-8430-452a-bd6b-2ca558fe0195)
+
 
 ## 15. Configuring Middleware (Program.cs) for Catalog.API
 
@@ -1930,5 +1936,7 @@ This is the **launchSettings.json** modified
 We **Run the Application** in Visual Studio
 
 ![image](https://github.com/user-attachments/assets/bfd3f939-25ab-4617-98ff-724ba5c13345)
+
+![image](https://github.com/user-attachments/assets/5d598649-3f55-44a9-9099-b11e374b18bb)
 
 
