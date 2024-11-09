@@ -649,7 +649,9 @@ public class CatalogDomainException : Exception
 }
 ```
 
-### 12.6. 
+### 12.6. Define the class to seed initial data into the Catalog database
+
+This C# code is a CatalogContextSeed class, part of the eShop.Catalog.API project, designed to **seed initial data into a catalog database**
 
 ![image](https://github.com/user-attachments/assets/33214cfc-733e-45f0-94ee-f79051e53a94)
 
