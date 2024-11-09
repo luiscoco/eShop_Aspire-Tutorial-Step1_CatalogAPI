@@ -192,6 +192,10 @@ builder.Build().Run();
 
 ## 7. Create the Catalog.API project folders structure
 
+We create these folder inside the Catalog.API project: Apis, Extensions, Infrastructure, Model, Pics, Services and Setup
+
+![image](https://github.com/user-attachments/assets/a65a12a7-3398-4e1d-97ff-14505ff58fd2)
+
 
 ## 8. Adding Catalog Images to the Catalog.API Project
 
