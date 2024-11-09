@@ -1337,11 +1337,208 @@ app.Run();
 
 ## 16. Adding Extensions for Enhanced Functionality in Catalog.API
 
+### 16.1. Adding Extensions.cs file 
+
 (Folder: Extensions)
 
-## 17. Setting Up appsettings.json with Database Connection Details
+```csharp
+using eShop.Catalog.API.Services;
+using Microsoft.Extensions.AI;
+using OpenAI;
 
-## 18. Running the Application to View Initial Results
+public static class Extensions
+{
+    public static void AddApplicationServices(this IHostApplicationBuilder builder)
+    {
+        builder.AddNpgsqlDbContext<CatalogContext>("catalogdb", configureDbContextOptions: dbContextOptionsBuilder =>
+        {
+            dbContextOptionsBuilder.UseNpgsql(builder =>
+            {
+                builder.UseVector();
+            });
+        });
+
+        // REVIEW: This is done for development ease but shouldn't be here in production
+        builder.Services.AddMigration<CatalogContext, CatalogContextSeed>();
+
+        // Add the integration services that consume the DbContext
+        //builder.Services.AddTransient<IIntegrationEventLogService, IntegrationEventLogService<CatalogContext>>();
+
+        //builder.Services.AddTransient<ICatalogIntegrationEventService, CatalogIntegrationEventService>();
+
+        //builder.AddRabbitMqEventBus("eventbus")
+        //       .AddSubscription<OrderStatusChangedToAwaitingValidationIntegrationEvent, OrderStatusChangedToAwaitingValidationIntegrationEventHandler>()
+        //       .AddSubscription<OrderStatusChangedToPaidIntegrationEvent, OrderStatusChangedToPaidIntegrationEventHandler>();
+
+        builder.Services.AddOptions<CatalogOptions>()
+            .BindConfiguration(nameof(CatalogOptions));
+
+        if (builder.Configuration["AI:Ollama:Endpoint"] is string ollamaEndpoint && !string.IsNullOrWhiteSpace(ollamaEndpoint))
+        {
+            builder.Services.AddEmbeddingGenerator<string, Embedding<float>>(b => b
+                .UseOpenTelemetry()
+                .UseLogging()
+                .Use(new OllamaEmbeddingGenerator(
+                    new Uri(ollamaEndpoint),
+                    builder.Configuration["AI:Ollama:EmbeddingModel"])));
+        }
+        else if (!string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString("openai")))
+        {
+            builder.AddOpenAIClientFromConfiguration("openai");
+            builder.Services.AddEmbeddingGenerator<string, Embedding<float>>(b => b
+                .UseOpenTelemetry()
+                .UseLogging()
+                .Use(b.Services.GetRequiredService<OpenAIClient>().AsEmbeddingGenerator(builder.Configuration["AI:OpenAI:EmbeddingModel"]!)));
+        }
+
+        builder.Services.AddScoped<ICatalogAI, CatalogAI>();
+    }
+}
+```
+
+### 16.2. Adding ActivityExtensions.cs file
+
+(Folder: Extensions)
+
+```csharp
+using System.Diagnostics;
+
+internal static class ActivityExtensions
+{
+    // See https://opentelemetry.io/docs/specs/otel/trace/semantic_conventions/exceptions/
+    public static void SetExceptionTags(this Activity activity, Exception ex)
+    {
+        if (activity is null)
+        {
+            return;
+        }
+
+        activity.AddTag("exception.message", ex.Message);
+        activity.AddTag("exception.stacktrace", ex.ToString());
+        activity.AddTag("exception.type", ex.GetType().FullName);
+        activity.SetStatus(ActivityStatusCode.Error);
+    }
+}
+```
+
+### 16.3. Adding MigrateDbContextExtensions.cs file
+
+(Folder: Extensions)
+
+```csharp
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+
+namespace Microsoft.AspNetCore.Hosting;
+
+internal static class MigrateDbContextExtensions
+{
+    private static readonly string ActivitySourceName = "DbMigrations";
+    private static readonly ActivitySource ActivitySource = new(ActivitySourceName);
+
+    public static IServiceCollection AddMigration<TContext>(this IServiceCollection services)
+        where TContext : DbContext
+        => services.AddMigration<TContext>((_, _) => Task.CompletedTask);
+
+    public static IServiceCollection AddMigration<TContext>(this IServiceCollection services, Func<TContext, IServiceProvider, Task> seeder)
+        where TContext : DbContext
+    {
+        // Enable migration tracing
+        services.AddOpenTelemetry().WithTracing(tracing => tracing.AddSource(ActivitySourceName));
+
+        return services.AddHostedService(sp => new MigrationHostedService<TContext>(sp, seeder));
+    }
+
+    public static IServiceCollection AddMigration<TContext, TDbSeeder>(this IServiceCollection services)
+        where TContext : DbContext
+        where TDbSeeder : class, IDbSeeder<TContext>
+    {
+        services.AddScoped<IDbSeeder<TContext>, TDbSeeder>();
+        return services.AddMigration<TContext>((context, sp) => sp.GetRequiredService<IDbSeeder<TContext>>().SeedAsync(context));
+    }
+
+    private static async Task MigrateDbContextAsync<TContext>(this IServiceProvider services, Func<TContext, IServiceProvider, Task> seeder) where TContext : DbContext
+    {
+        using var scope = services.CreateScope();
+        var scopeServices = scope.ServiceProvider;
+        var logger = scopeServices.GetRequiredService<ILogger<TContext>>();
+        var context = scopeServices.GetService<TContext>();
+
+        using var activity = ActivitySource.StartActivity($"Migration operation {typeof(TContext).Name}");
+
+        try
+        {
+            logger.LogInformation("Migrating database associated with context {DbContextName}", typeof(TContext).Name);
+
+            var strategy = context.Database.CreateExecutionStrategy();
+
+            await strategy.ExecuteAsync(() => InvokeSeeder(seeder, context, scopeServices));
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "An error occurred while migrating the database used on context {DbContextName}", typeof(TContext).Name);
+
+            activity.SetExceptionTags(ex);
+
+            throw;
+        }
+    }
+
+    private static async Task InvokeSeeder<TContext>(Func<TContext, IServiceProvider, Task> seeder, TContext context, IServiceProvider services)
+        where TContext : DbContext
+    {
+        using var activity = ActivitySource.StartActivity($"Migrating {typeof(TContext).Name}");
+
+        try
+        {
+            await context.Database.MigrateAsync();
+            await seeder(context, services);
+        }
+        catch (Exception ex)
+        {
+            activity.SetExceptionTags(ex);
+
+            throw;
+        }
+    }
+
+    private class MigrationHostedService<TContext>(IServiceProvider serviceProvider, Func<TContext, IServiceProvider, Task> seeder)
+        : BackgroundService where TContext : DbContext
+    {
+        public override Task StartAsync(CancellationToken cancellationToken)
+        {
+            return serviceProvider.MigrateDbContextAsync(seeder);
+        }
+
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            return Task.CompletedTask;
+        }
+    }
+}
+public interface IDbSeeder<in TContext> where TContext : DbContext
+{
+    Task SeedAsync(TContext context);
+}
+```
+
+## 17. Adding CatalogOptions file
+
+**CatalogOptions.cs**
+
+```csharp
+namespace eShop.Catalog.API;
+
+public class CatalogOptions
+{
+    public string PicBaseUrl { get; set; }
+    public bool UseCustomizationData { get; set; }
+}
+```
+
+## 18. Setting Up appsettings.json with Database Connection Details
+
+## 19. Running the Application to View Initial Results
 
 
 
