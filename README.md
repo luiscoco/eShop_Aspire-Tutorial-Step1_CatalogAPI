@@ -1616,9 +1616,17 @@ We have to add the database connection string in the **appsettings.json** file
 }
 ```
 
-## 19. Create the Database and Tables (Migrations 
+## 19. Create the Database and Tables
 
-We right click on the Catalog.API project and select the menu option **Set as StartUp Project**
+(Folder: Migrations)
+
+**IMPORTANT NOTE**: for this sample before creating the Migrations we have to introduce a modification in the **CatalogItem.cs** file
+
+We have to define the **Embedding** variable as **Nullable**, including a question mark **?** symbol
+
+![image](https://github.com/user-attachments/assets/2606723f-1c17-4b61-bbb0-6914e28e2182)
+
+We right click on the **Catalog.API** project and select the menu option **Set as StartUp Project**
 
 ![image](https://github.com/user-attachments/assets/9bf912f8-6cf5-4969-8e47-791c47c674a3)
 
@@ -1638,9 +1646,22 @@ We Add a Migration for creating the Database and Tables. We run this command:
 Add-Migration DatabaseInitialization
 ```
 
+![image](https://github.com/user-attachments/assets/de0a7427-acf0-4d66-b5d2-ff1c98deb3ff)
+
+We verify a new folder **Migrations** we created
+
+![image](https://github.com/user-attachments/assets/78335eb5-5058-45d2-8a0c-5e1a9161a1f2)
+
+We review the Migrations automatically generated code
+
+```csharp
+
+```
 
 
-We
+```csharp
+
+```
 
 ## 20. Running the Application to View Initial Results
 
