@@ -86,8 +86,6 @@ We verify the new reference
 
 ## 4. Removing the Default Blazor Web App
 
-
-
 We **remove** the **Blazor Web App** project from the eShop Solution
 
 ![image](https://github.com/user-attachments/assets/95ed1f41-ebe4-41d1-aafb-5319db952308)
@@ -111,6 +109,16 @@ This is my actual **Program.cs** file, in the **eShop.AppHost** project
 This is the modified/updated content
 
 ![image](https://github.com/user-attachments/assets/e9a8eabf-fdbe-45b0-bc7d-b7f3464e1254)
+
+We Clean and Build the application and we confirm there is no error
+
+![image](https://github.com/user-attachments/assets/fabeb6d7-3c20-4683-a299-98bc6f00a072)
+
+We also Run the Application to confirm it properly work
+
+![image](https://github.com/user-attachments/assets/01a0bf55-1701-41c6-865f-bdf9929fcf0c)
+
+![image](https://github.com/user-attachments/assets/629543c8-6957-4f5b-b764-a311af71b430)
 
 ## 5. Loading Required NuGet Packages for eShop.AppHost
 
