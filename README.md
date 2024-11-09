@@ -192,25 +192,47 @@ builder.Build().Run();
 
 ## 7. Add the Catalog.API project Nuget packages
 
-**Asp.Versioning.Http**:
+### 7.1. Asp.Versioning.Http
 
-**Aspire.Azure.AI.OpenAI**:
+This library is typically part of ASP.NET Core's API versioning tools. It helps developers **version their HTTP APIs**, allowing clients to interact with different versions of an API endpoint, useful for maintaining backward compatibility while evolving the API
 
-**Aspire.Npgsql.EntityFrameworkCore.PostgreSQL**:
+### 7.2. Aspire.Azure.AI.OpenAI
 
-**Microsoft.EntityFrameworkCore.Tools**:
+Likely part of the Aspire framework, this package is designed to interact with **Azure's AI services**, particularly those that provide **OpenAI's language models**. It enables integration with OpenAI models deployed on Azure for tasks like natural language processing, code generation, and content creation
 
-**Microsoft.Extensions.AI**:
+### 7.3. Aspire.Npgsql.EntityFrameworkCore.PostgreSQL
 
-**Microsoft.Extensions.AI.Ollama**:
+This package would provide support for using **Npgsql (a PostgreSQL data provider for .NET)** in the Aspire framework, specifically in Entity Framework Core. It allows developers to work with PostgreSQL databases in .NET applications using **ORM features provided by Entity Framework Core**
 
-**Microsoft.Extensions.AI.OpenAI**:
+### 7.4. Microsoft.EntityFrameworkCore.Tools
 
-**Npgsql.EntityFrameworkCore.PostgreSQL**:
+A set of command-line tools for Entity Framework Core, this package assists developers in **managing database migrations**, updating schemas, and generating code models for their databases. It simplifies database management and schema evolution for .NET Core applications
 
-**Pgvector**:
+### 7.5. Microsoft.Extensions.AI
 
-**Pgvector.EntityFrameworkCore**:
+Part of the Microsoft.Extensions namespace, this package likely provides common extensions for working with **AI services**, focusing on ease of integration and dependency injection for AI-related services in .NET applications
+
+### 7.6. Microsoft.Extensions.AI.Ollama
+
+This library allows **integration with Ollama**, a platform providing access to various machine learning models. It includes configuration and dependency injection utilities, streamlining the use of Ollama's models within .NET applications
+
+### 7.7. Microsoft.Extensions.AI.OpenAI
+
+A library to integrate OpenAI models directly into .NET applications. It provides configuration and extension methods to connect with **OpenAI's API**, making it easier to use models like GPT and DALL-E for natural language processing and other AI-driven features
+
+### 7.8. Npgsql.EntityFrameworkCore.PostgreSQL
+
+An Entity Framework Core provider for **PostgreSQL**, allowing .NET applications to interact with PostgreSQL databases via Npgsql. It supports **LINQ, migrations, and various Entity Framework Core features**, tailored for PostgreSQL
+
+### 7.9. Pgvector
+
+Pgvector is an extension for PostgreSQL that adds support for vector data types. It's especially useful for applications in machine learning and AI, where you may need to **store embeddings** or feature **vectors** for similarity searches and recommendations
+
+### 7.10. Pgvector.EntityFrameworkCore
+
+This package adds Entity Framework Core support for Pgvector, enabling .NET applications to work with **vector data in PostgreSQL databases** seamlessly. It allows developers to perform vector operations in code and store embeddings or feature vectors directly
+
+These libraries collectively support various functions, from AI integration to database management, enabling developers to build robust, AI-driven, and database-backed applications in .NET.
 
 ## 8. Create the Catalog.API project folders structure
 
