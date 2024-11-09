@@ -861,7 +861,8 @@ public sealed class CatalogAI : ICatalogAI
         {
             long timestamp = Stopwatch.GetTimestamp();
 
-            var embedding = (await _embeddingGenerator.GenerateAsync(text))[0].Vector;
+            //var embedding = (await _embeddingGenerator.GenerateAsync(text))[0].Vector;
+            var embedding = (await _embeddingGenerator.GenerateAsync(new[] { text }))[0].Vector;
             embedding = embedding[0..EmbeddingDimensions];
 
             if (_logger.IsEnabled(LogLevel.Trace))
@@ -877,6 +878,20 @@ public sealed class CatalogAI : ICatalogAI
 
     private static string CatalogItemToString(CatalogItem item) => $"{item.Name} {item.Description}";
 }
+```
+
+**IMPORTANT NOTE**: We fixed and error in the **CatalogAI.cs** file
+
+In this line we get an error **"Argument 1: cannot convert from 'string' to 'System.Collections.Generic.IEnumerable<string>'"**
+
+```csharp
+var embedding = (await _embeddingGenerator.GenerateAsync(text))[0].Vector;
+```
+
+We replace that line with this new code:
+
+```csharp
+var embedding = (await _embeddingGenerator.GenerateAsync(new[] { text }))[0].Vector;
 ```
 
 ## 14. Adding API Endpoints to Catalog.API for Catalog Functionality
