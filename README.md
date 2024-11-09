@@ -1919,7 +1919,16 @@ Then we right click on the **eShop.AppHost** project and we **Set it as StartUp 
 
 ![image](https://github.com/user-attachments/assets/afa54345-68de-4e14-9be0-7d78f3ac140d)
 
-We run the application in Visual Studio
+We remove the **weatherforecast** in the **launchURL** variables inside the **launchSettings.json**
+
+![image](https://github.com/user-attachments/assets/d8b9c950-275f-4f34-913c-e846d5ec2f95)
+
+This is the **launchSettings.json** modified
+
+![image](https://github.com/user-attachments/assets/764a5f95-25f7-4cdb-9ba1-7c240f513b56)
+
+We **Run the Application** in Visual Studio
 
 ![image](https://github.com/user-attachments/assets/bfd3f939-25ab-4617-98ff-724ba5c13345)
+
 
