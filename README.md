@@ -188,6 +188,8 @@ var catalogApi = builder.AddProject<Projects.Catalog_API>("catalog-api")
 builder.Build().Run();
 ```
 
+![image](https://github.com/user-attachments/assets/ed86891c-a04e-4868-8c78-e54cd24e0a4a)
+
 ## 7. Create the Catalog.API project folders structure
 
 
