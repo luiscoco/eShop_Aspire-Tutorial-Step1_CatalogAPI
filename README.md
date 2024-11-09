@@ -495,7 +495,7 @@ We declare **three tables** in the database:
 
 **builder.HasPostgresExtension("vector")**: Indicates that the database uses a PostgreSQL extension for **handling vector data**
 
-**builder.ApplyConfiguration(...)**: This applies configurations for each entity type, which would define specific **settings for those tables** (like column names, constraints, etc.).
+**builder.ApplyConfiguration(...)**: This applies configurations for each Entity Framwork Entity Type, which would define specific **settings for those tables** (like column names, constraints, etc.).
 
 **CatalogContext.cs**
 
@@ -529,10 +529,100 @@ namespace Catalog.API.Infrastructure
 }
 ```
 
-### 12.2. 
+### 12.2. Mapping "CatalogBrand" EntityFramwork Entity to the "CatalogBrand" Database Table
 
-We configure 
+The CatalogBrandEntityTypeConfiguration class, which configures the **mapping of the CatalogBrand entity** to the **database table CatalogBrand** in Entity Framework Core
 
+![image](https://github.com/user-attachments/assets/4ae228d9-21dc-4f9e-b92e-550b1fadade7)
+
+**CatalogBrandEntityTypeConfiguration.cs**
+
+```csharp
+using eShop.Catalog.API.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace eShop.Catalog.API.Infrastructure.EntityConfigurations;
+
+class CatalogBrandEntityTypeConfiguration
+    : IEntityTypeConfiguration<CatalogBrand>
+{
+    public void Configure(EntityTypeBuilder<CatalogBrand> builder)
+    {
+        builder.ToTable("CatalogBrand");
+
+        builder.Property(cb => cb.Brand)
+            .HasMaxLength(100);
+    }
+}
+```
+
+### 12.3. Mapping "Item" EntityFramwork Entity to the "Item" Database Table
+
+The CatalogItemEntityTypeConfiguration class, which configures the **mapping of the Item entity** to the **database table Item** in Entity Framework Core
+
+![image](https://github.com/user-attachments/assets/175af625-1430-43ca-ad50-a9a2daa1ac2b)
+
+**CatalogItemEntityTypeConfiguration.cs**
+
+```csharp
+using eShop.Catalog.API.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace eShop.Catalog.API.Infrastructure.EntityConfigurations;
+
+class CatalogItemEntityTypeConfiguration
+    : IEntityTypeConfiguration<CatalogItem>
+{
+    public void Configure(EntityTypeBuilder<CatalogItem> builder)
+    {
+        builder.ToTable("Catalog");
+
+        builder.Property(ci => ci.Name)
+            .HasMaxLength(50);
+
+        builder.Property(ci => ci.Embedding)
+            .HasColumnType("vector(384)");
+
+        builder.HasOne(ci => ci.CatalogBrand)
+            .WithMany();
+
+        builder.HasOne(ci => ci.CatalogType)
+            .WithMany();
+
+        builder.HasIndex(ci => ci.Name);
+    }
+}
+```
+
+### 12.4. Mapping "Type" EntityFramwork Entity to the "Type" Database Table
+
+The CatalogTypeEntityTypeConfiguration class, which configures the **mapping of the Type entity** to the **database table Type** in Entity Framework Core
+
+![image](https://github.com/user-attachments/assets/ae66f477-7518-4819-9835-5c25eb2a7a72)
+
+**CatalogTypeEntityTypeConfiguration.cs**
+
+```csharp
+using eShop.Catalog.API.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace eShop.Catalog.API.Infrastructure.EntityConfigurations;
+
+class CatalogTypeEntityTypeConfiguration
+    : IEntityTypeConfiguration<CatalogType>
+{
+    public void Configure(EntityTypeBuilder<CatalogType> builder)
+    {
+        builder.ToTable("CatalogType");
+
+        builder.Property(cb => cb.Type)
+            .HasMaxLength(100);
+    }
+}
+```
 
 ## 13. Implementing Core Services in Catalog.API
 
