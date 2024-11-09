@@ -1937,6 +1937,15 @@ We **Run the Application** in Visual Studio
 
 ![image](https://github.com/user-attachments/assets/bfd3f939-25ab-4617-98ff-724ba5c13345)
 
+We can visit the **Dashboard**
+
+https://localhost:17230/
+
 ![image](https://github.com/user-attachments/assets/5d598649-3f55-44a9-9099-b11e374b18bb)
 
+We also can hit one API EndPoint
+
+https://localhost:7384/api/catalog/items
+
+![image](https://github.com/user-attachments/assets/6167e8f0-b060-47a8-abf8-d12117e1016e)
 
