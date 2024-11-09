@@ -66,8 +66,11 @@ We edit **eShop.sln** file
 
 ![image](https://github.com/user-attachments/assets/b98af45a-b418-496b-bb9e-8cb8dcbd277f)
 
+![image](https://github.com/user-attachments/assets/a48e07e4-881e-496c-92e2-a442400dd4b1)
 
+We introduce the new API project name **Catalog.API**, and we save the file
 
+![image](https://github.com/user-attachments/assets/fd80a70e-2811-4d2d-a23a-919bcd5c3577)
 
 ## 4. Removing the Default Blazor Web App
 
