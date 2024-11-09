@@ -1465,6 +1465,12 @@ internal static class ActivityExtensions
 
 (Folder: Extensions)
 
+This code defines a set of **extension methods** and a **hosted service** to support **automatic database migrations** for a .NET Core application using Entity Framework Core
+
+This code provides an efficient way to **handle database migrations** and **seeding at application startup**, with features for tracing, error handling, and extensibility through dependency injection
+
+![image](https://github.com/user-attachments/assets/2c130e95-3a76-4746-904d-e2e6e1766a0a)
+
 ```csharp
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -1608,5 +1614,7 @@ We
 
 ## 20. Running the Application to View Initial Results
 
+First of all, we have to **Run Docker Desktop**
 
+Then 
 
