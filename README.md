@@ -40,10 +40,13 @@ We review the project folders and files structure
 
 ![image](https://github.com/user-attachments/assets/b6c0dc12-75a8-4286-bad2-3c25871d01ef)
 
-
-
 ## 3. Renaming Project Structure for Clarity and Organization
 
+We right click on the API project name and we set the new name **Catalog.API**
+
+![image](https://github.com/user-attachments/assets/e7a64bc6-9647-4c4c-9d18-75924747c9c2)
+
+![image](https://github.com/user-attachments/assets/c11693d5-fe73-41ac-8110-f96b73adc8cd)
 
 ## 4. Removing the Default Blazor Web App
 
