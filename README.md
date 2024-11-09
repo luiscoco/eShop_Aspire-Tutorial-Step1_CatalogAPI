@@ -4,7 +4,7 @@
 
 The GitHub repository includes the full codebase, configuration, and deployment details: https://github.com/dotnet/eShop
 
-![image](https://github.com/user-attachments/assets/d5f84e4e-a7b6-46ed-b2e9-8cfaea8b5f92)
+![image](https://github.com/user-attachments/assets/692bad8b-34f8-4597-b6b1-d44d7e5d9b33)
 
 Here’s a high-level overview of the architecture flow from the diagram:
 
