@@ -196,14 +196,23 @@ We create these folder inside the Catalog.API project: Apis, Extensions, Infrast
 
 ![image](https://github.com/user-attachments/assets/a65a12a7-3398-4e1d-97ff-14505ff58fd2)
 
-
 ## 8. Adding Catalog Images to the Catalog.API Project
 
 (Folder: Pics)
 
+Inside the **Pics** folder we include the Catalog **WebP** images (101 files)
+
+The **WebP** image file format is a modern image format developed by Google to optimize web images by providing high-quality visuals with smaller file sizes compared to traditional formats like JPEG and PNG
+
+**WebP** achieves this by using both lossless and lossy compression, making it highly versatile for various web use cases where load time and bandwidth are important considerations
+
+![image](https://github.com/user-attachments/assets/274f8225-636b-47c9-aa3d-75e1203c3dc1)
+
 ## 9. Setting Up Initial Database Data for Catalog.API
 
 (Folder: Setup)
+
+
 
 ## 10. Creating Data Models and Configuring CatalogOptions in Catalog.API
 
