@@ -50,6 +50,14 @@ We right click on the API project name and we set the new name **Catalog.API**
 
 ## 4. Removing the Default Blazor Web App
 
+We remove the Blazor Web App project from the eShop Solution
+
+![image](https://github.com/user-attachments/assets/95ed1f41-ebe4-41d1-aafb-5319db952308)
+
+This is the Solution new structure
+
+![image](https://github.com/user-attachments/assets/4e09bef5-b646-4ac0-ad94-be178df3c577)
+
 
 ## 5. Loading Required NuGet Packages for eShop.AppHost
 
