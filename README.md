@@ -212,7 +212,9 @@ The **WebP** image file format is a modern image format developed by Google to o
 
 (Folder: Setup)
 
+Inside the **Setup** folder we include the **catalog.json** file for Catalog database initialization
 
+![image](https://github.com/user-attachments/assets/4e34f0b9-6e1a-4131-9991-96fd065ca854)
 
 ## 10. Creating Data Models and Configuring CatalogOptions in Catalog.API
 
