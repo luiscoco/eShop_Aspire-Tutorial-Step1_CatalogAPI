@@ -653,6 +653,14 @@ public class CatalogDomainException : Exception
 
 This C# code is a CatalogContextSeed class, part of the eShop.Catalog.API project, designed to **seed initial data into a catalog database**
 
+This code **initializes a product catalog** by:
+
+- Loading data from a JSON file
+
+- Inserting unique brands, types, and items into the database
+
+- Optionally generating AI embeddings for catalog items if AI support is enabled. The seeding process is logged, helping track how many brands, types, and items were added
+
 ![image](https://github.com/user-attachments/assets/33214cfc-733e-45f0-94ee-f79051e53a94)
 
 ```csharp
