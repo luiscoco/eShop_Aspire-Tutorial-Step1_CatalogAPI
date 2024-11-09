@@ -98,13 +98,19 @@ This is the Solution new structure
 
 We double click on the **eShop.AppHost** project and we confirm there is no reference to the **Blazor Web App**
 
-![image](https://github.com/user-attachments/assets/209f1b81-3000-45a8-9a92-dcef4b6e32ca)
+![image](https://github.com/user-attachments/assets/9a99ec0d-c0ea-447d-bf79-25e8a54d52d5)
 
-We also remove the Blazor Web App Service registry in the **Program.cs** (eShop.AppHost project)
+We also have to edit and modify the **Program.cs** file, in the **eShop.AppHost** project
 
+We have to remove the Blazor Web App project service registry, and also we have to rename the project name for the API
 
+This is my actual **Program.cs** file, in the **eShop.AppHost** project
 
+![image](https://github.com/user-attachments/assets/9d5b67d2-effc-4510-a568-7f3eeb5d5285)
 
+This is the modified/updated content
+
+![image](https://github.com/user-attachments/assets/e9a8eabf-fdbe-45b0-bc7d-b7f3464e1254)
 
 ## 5. Loading Required NuGet Packages for eShop.AppHost
 
