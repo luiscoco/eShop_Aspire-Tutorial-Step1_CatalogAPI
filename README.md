@@ -20,7 +20,28 @@ Here’s a high-level overview of the architecture flow from the diagram:
 
 ## 2. Creating a New Aspire .NET 9 Application in Visual Studio 2022
 
- 
+We run Visual Studio 2022 Community Edition and we Create a New Project
+
+![image](https://github.com/user-attachments/assets/63f66e16-bf8d-4f1e-88ab-c782638e2942)
+
+We search for the **aspire** project templates and we select **.NET Aspire 9 Starter App**, and we click on the Next button
+
+![image](https://github.com/user-attachments/assets/e3b0374c-1f3c-4388-ad0f-aa2fe2a0801d)
+
+We input the project name and location
+
+![image](https://github.com/user-attachments/assets/f3d11775-18c7-4c10-a758-19e6d8729eb3)
+
+We select the **.NET 9** Framework and we leave in the other options the default values, and we click on the Create button
+
+![image](https://github.com/user-attachments/assets/6546023a-d73b-42f9-88c5-e4ffa70956df)
+
+We review the project folders and files structure
+
+![image](https://github.com/user-attachments/assets/b6c0dc12-75a8-4286-bad2-3c25871d01ef)
+
+
+
 ## 3. Renaming Project Structure for Clarity and Organization
 
 
