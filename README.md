@@ -1281,18 +1281,6 @@ This line adds support for returning standardized error details in HTTP response
 builder.Services.AddProblemDetails();
 ```
 
-This code would enable API versioning, allowing the API to support multiple versions
-
-```csharp
-builder.Services.AddApiVersioning();
-```
-
-This code would integrate OpenAPI/Swagger for generating API documentation, potentially with versioning support
-
-```csharp
-builder.AddDefaultOpenApi(withApiVersioning);: 
-```
-
 This builds the app with all the configured services and middleware, making it ready for handling requests
 
 ```csharp
