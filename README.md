@@ -48,15 +48,45 @@ We right click on the API project name and we set the new name **Catalog.API**
 
 ![image](https://github.com/user-attachments/assets/c11693d5-fe73-41ac-8110-f96b73adc8cd)
 
+We also have to close Visual Studio and rename the project folder name
+
+![image](https://github.com/user-attachments/assets/dc06711d-1d9d-46cc-b116-a97637b73ee3)
+
+![image](https://github.com/user-attachments/assets/4132d1d6-2304-4aa8-afd8-6b7b1a367093)
+
+![image](https://github.com/user-attachments/assets/a1196dfc-4d16-4716-9d66-b6da061cc32a)
+
+We confirm the project name was also changed
+
+![image](https://github.com/user-attachments/assets/419b00a3-d033-4708-a540-27e9a3a64b32)
+
+Now we have to change the reference to the project in the Solution file
+
+We edit **eShop.sln** file
+
+![image](https://github.com/user-attachments/assets/b98af45a-b418-496b-bb9e-8cb8dcbd277f)
+
+
+
+
 ## 4. Removing the Default Blazor Web App
 
-We remove the Blazor Web App project from the eShop Solution
+We **remove** the **Blazor Web App** project from the eShop Solution
 
 ![image](https://github.com/user-attachments/assets/95ed1f41-ebe4-41d1-aafb-5319db952308)
 
 This is the Solution new structure
 
 ![image](https://github.com/user-attachments/assets/4e09bef5-b646-4ac0-ad94-be178df3c577)
+
+We double click on the **eShop.AppHost** project and we confirm there is no reference to the **Blazor Web App**
+
+![image](https://github.com/user-attachments/assets/209f1b81-3000-45a8-9a92-dcef4b6e32ca)
+
+We also remove the Blazor Web App Service registry in the **Program.cs** (eShop.AppHost project)
+
+
+
 
 
 ## 5. Loading Required NuGet Packages for eShop.AppHost
