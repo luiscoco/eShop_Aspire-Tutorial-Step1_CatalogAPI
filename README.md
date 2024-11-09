@@ -883,9 +883,7 @@ The class contains **RESTful API endpoint** mappings and methods that handle req
 
 **namespace eShop.Catalog.API**: Encapsulates the API within the eShop catalog context
 
-**MapCatalogApiV1 Method**:
-
-This method registers all API routes for version 1.0 under the base path "api/catalog"
+**MapCatalogApiV1 Method**: This method registers all API routes for version 1.0 under the base path "api/catalog"
 
 **Routes are grouped by function**:
 
