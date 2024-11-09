@@ -475,6 +475,59 @@ public record PaginationRequest(int PageSize = 10, int PageIndex = 0);
 
 (Folder: Infrastructure)
 
+We first have to create two folders inside the database Infrastructure folder
+
+![image](https://github.com/user-attachments/assets/66e8317b-2514-4470-947a-c925655ed4b3)
+
+We start defining the **DbContext** file. The **CatalogContext** class here defines a **database context** for an **Entity Framework Core (EF Core)** application
+
+We declare **three tables** in the database: 
+
+**CatalogItems**: Represents a table for CatalogItem entities in the database
+
+**CatalogBrands**: Represents a table for CatalogBrand entities
+
+**CatalogTypes**: Represents a table for CatalogType entities. These DbSet properties allow querying and saving instances of these entity types
+
+**builder.HasPostgresExtension("vector")**: Indicates that the database uses a PostgreSQL extension for **handling vector data**
+
+**builder.ApplyConfiguration(...)**: This applies configurations for each entity type, which would define specific **settings for those tables** (like column names, constraints, etc.).
+
+**CatalogContext.cs**
+
+```csharp
+using eShop.Catalog.API.Model;
+using Microsoft.EntityFrameworkCore;
+
+namespace Catalog.API.Infrastructure
+{
+    public class CatalogContext : DbContext
+    {
+        public CatalogContext(DbContextOptions<CatalogContext> options, IConfiguration configuration) : base(options)
+        {
+        }
+
+        public required DbSet<CatalogItem> CatalogItems { get; set; }
+        public required DbSet<CatalogBrand> CatalogBrands { get; set; }
+        public required DbSet<CatalogType> CatalogTypes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.HasPostgresExtension("vector");
+            builder.ApplyConfiguration(new CatalogBrandEntityTypeConfiguration());
+            builder.ApplyConfiguration(new CatalogTypeEntityTypeConfiguration());
+            builder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
+
+            // Add the outbox table to this context
+            //builder.UseIntegrationEventLogs();
+        }
+    }
+}
+```
+
+We configure 
+
+
 ## 13. Implementing Core Services in Catalog.API
 
 (Folder: Services)
