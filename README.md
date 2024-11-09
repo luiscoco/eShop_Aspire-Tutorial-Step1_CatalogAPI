@@ -1584,7 +1584,22 @@ public class CatalogOptions
 
 ## 18. Setting Up appsettings.json with Database Connection Details
 
+We have to add the database connection string in the **appsettings.json** file
 
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "CatalogDB": "Host=localhost;Database=CatalogDB;Username=postgres;Password=yourWeak(!)Password"
+  }
+}
+```
 
 ## 19. Create the Database and Tables (Migrations 
 
