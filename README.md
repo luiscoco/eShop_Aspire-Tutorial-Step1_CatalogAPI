@@ -1351,6 +1351,36 @@ app.Run();
 
 (Folder: Extensions)
 
+This C# code is a configuration class designed to extend an application’s builder with various services for a catalog API in an e-commerce setting
+
+Overall, this extension class configures database, options, AI services, and scoped services, preparing the catalog API application with development-friendly setups and AI integration while leaving production-critical configurations for further review.
+
+**Database Setup**:
+
+**builder.AddNpgsqlDbContext<CatalogContext>("catalogdb", ...)**: Adds a PostgreSQL database context (CatalogContext) using Npgsql. The UseVector() method is added to configure vector support, potentially for handling AI or ML data types within the database
+
+**builder.Services.AddMigration<CatalogContext, CatalogContextSeed>()**: This part adds a service to handle migrations for the CatalogContext, enabling easy database updates during development
+
+**Options and Configuration**:
+
+**builder.Services.AddOptions<CatalogOptions>().BindConfiguration(nameof(CatalogOptions))**: Binds options for the catalog configuration, making them accessible throughout the application
+
+**AI and Embedding Generator Configuration**:
+
+This section checks if either an Ollama endpoint or an OpenAI connection string is configured in the app’s settings
+
+**Ollama Integration**: If Ollama:Endpoint is provided, it sets up an embedding generator using OllamaEmbeddingGenerator with logging and telemetry
+
+**OpenAI Integration**: If an OpenAI connection string is available, the application configures an OpenAIClient and sets it up to generate embeddings, allowing AI-powered operations (like search or recommendation) using embeddings
+
+**Scoped Service Registration**:
+
+**builder.Services.AddScoped<ICatalogAI, CatalogAI>()**: Registers ICatalogAI as a scoped service, ensuring instances of CatalogAI are created per HTTP request or job, depending on how it's used
+
+We review the **Extensions.cs** code:
+
+![image](https://github.com/user-attachments/assets/3329c8aa-5224-469f-b5bc-af8161f631b9)
+
 ```csharp
 using eShop.Catalog.API.Services;
 using Microsoft.Extensions.AI;
@@ -1371,17 +1401,7 @@ public static class Extensions
         // REVIEW: This is done for development ease but shouldn't be here in production
         builder.Services.AddMigration<CatalogContext, CatalogContextSeed>();
 
-        // Add the integration services that consume the DbContext
-        //builder.Services.AddTransient<IIntegrationEventLogService, IntegrationEventLogService<CatalogContext>>();
-
-        //builder.Services.AddTransient<ICatalogIntegrationEventService, CatalogIntegrationEventService>();
-
-        //builder.AddRabbitMqEventBus("eventbus")
-        //       .AddSubscription<OrderStatusChangedToAwaitingValidationIntegrationEvent, OrderStatusChangedToAwaitingValidationIntegrationEventHandler>()
-        //       .AddSubscription<OrderStatusChangedToPaidIntegrationEvent, OrderStatusChangedToPaidIntegrationEventHandler>();
-
-        builder.Services.AddOptions<CatalogOptions>()
-            .BindConfiguration(nameof(CatalogOptions));
+        builder.Services.AddOptions<CatalogOptions>().BindConfiguration(nameof(CatalogOptions));
 
         if (builder.Configuration["AI:Ollama:Endpoint"] is string ollamaEndpoint && !string.IsNullOrWhiteSpace(ollamaEndpoint))
         {
@@ -1409,6 +1429,16 @@ public static class Extensions
 ### 16.2. Adding ActivityExtensions.cs file
 
 (Folder: Extensions)
+
+This code is an extension method for the Activity class that helps record exception information for telemetry purposes
+
+It’s designed to support OpenTelemetry, which is a standard for observability, including tracing and metrics in distributed systems
+
+This code is useful for enhancing observability by logging detailed exception information within trace data, making it easier to analyze and debug issues in distributed systems
+
+We review the **ActivityExtensions.cs** code:
+
+![image](https://github.com/user-attachments/assets/b088810d-22c0-490a-af02-379543e860eb)
 
 ```csharp
 using System.Diagnostics;
