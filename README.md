@@ -297,7 +297,6 @@ public class CatalogItem
 
     public CatalogItem() { }
 
-
     /// <summary>
     /// Decrements the quantity of a particular item in inventory and ensures the restockThreshold hasn't
     /// been breached. If so, a RestockRequest is generated in CheckThreshold. 
@@ -357,28 +356,47 @@ public class CatalogItem
 }
 ```
 
-****
+**CatalogType.cs**
 
 ```csharp
+using System.ComponentModel.DataAnnotations;
 
+namespace eShop.Catalog.API.Model;
+
+public class CatalogType
+{
+    public int Id { get; set; }
+
+    [Required]
+    public string Type { get; set; }
+}
 ```
 
-****
+**PaginatedItems.cs**
 
 ```csharp
+using System.Text.Json.Serialization;
 
+namespace eShop.Catalog.API.Model;
+
+public class PaginatedItems<TEntity>(int pageIndex, int pageSize, long count, IEnumerable<TEntity> data) where TEntity : class
+{
+    public int PageIndex { get; } = pageIndex;
+
+    public int PageSize { get; } = pageSize;
+
+    public long Count { get; } = count;
+
+    public IEnumerable<TEntity> Data { get;} = data;
+}
 ```
 
-****
+**PaginationRequest.cs**
 
 ```csharp
+namespace eShop.Catalog.API.Model;
 
-```
-
-****
-
-```csharp
-
+public record PaginationRequest(int PageSize = 10, int PageIndex = 0);
 ```
 
 ## 11. Building the CatalogContext for Data Handling in Catalog.API
