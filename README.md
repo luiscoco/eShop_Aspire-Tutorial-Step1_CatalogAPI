@@ -192,6 +192,14 @@ builder.Build().Run();
 
 ## 7. Add the Catalog.API project Nuget packages
 
+![image](https://github.com/user-attachments/assets/fc3d9db2-73f8-4134-8afa-169e8754890b)
+
+**IMPORTANT NOTE**: It is advisable to first install these two packages:
+
+Aspire.Npgsql.EntityFrameworkCore.PostgreSQL
+
+Npgsql.EntityFrameworkCore.PostgreSQL
+
 ### 7.1. Asp.Versioning.Http
 
 This library is typically part of ASP.NET Core's API versioning tools. It helps developers **version their HTTP APIs**, allowing clients to interact with different versions of an API endpoint, useful for maintaining backward compatibility while evolving the API
