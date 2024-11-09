@@ -479,7 +479,11 @@ We first have to create two folders inside the database Infrastructure folder
 
 ![image](https://github.com/user-attachments/assets/66e8317b-2514-4470-947a-c925655ed4b3)
 
-We start defining the **DbContext** file. The **CatalogContext** class here defines a **database context** for an **Entity Framework Core (EF Core)** application
+### 12.1. Define the DbContext file
+
+![image](https://github.com/user-attachments/assets/a10bc277-627f-4b9d-941b-aacc766e4533)
+
+The **CatalogContext** class is inherited from the DbContext, and defines a **database context** for an **Entity Framework Core (EF Core)** application
 
 We declare **three tables** in the database: 
 
@@ -524,6 +528,8 @@ namespace Catalog.API.Infrastructure
     }
 }
 ```
+
+### 12.2. 
 
 We configure 
 
