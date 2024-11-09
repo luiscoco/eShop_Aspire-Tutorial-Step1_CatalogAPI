@@ -753,6 +753,122 @@ public partial class CatalogContextSeed(
 
 (Folder: Services)
 
+These code include these main functionalities:
+
+- Gets whether the AI system is enabled
+
+- Gets an embedding vector for the specified text
+
+- Gets an embedding vector for the specified catalog item
+
+- Gets embedding vectors for the specified catalog items
+
+![image](https://github.com/user-attachments/assets/010a6202-9f87-4343-ac8a-a0ff9eb2fb1e)
+
+**ICatalogAI.cs**
+
+```csharp
+using Pgvector;
+
+namespace eShop.Catalog.API.Services;
+
+public interface ICatalogAI
+{
+    /// <summary>Gets whether the AI system is enabled.</summary>
+    bool IsEnabled { get; }
+
+    /// <summary>Gets an embedding vector for the specified text.</summary>
+    ValueTask<Vector> GetEmbeddingAsync(string text);
+    
+    /// <summary>Gets an embedding vector for the specified catalog item.</summary>
+    ValueTask<Vector> GetEmbeddingAsync(CatalogItem item);
+
+    /// <summary>Gets embedding vectors for the specified catalog items.</summary>
+    ValueTask<IReadOnlyList<Vector>> GetEmbeddingsAsync(IEnumerable<CatalogItem> item);
+}
+```
+
+**CatalogAI.cs**
+
+```csharp
+using System.Diagnostics;
+using Microsoft.Extensions.AI;
+using Pgvector;
+
+namespace eShop.Catalog.API.Services;
+
+public sealed class CatalogAI : ICatalogAI
+{
+    private const int EmbeddingDimensions = 384;
+    private readonly IEmbeddingGenerator<string, Embedding<float>> _embeddingGenerator;
+
+    /// <summary>The web host environment.</summary>
+    private readonly IWebHostEnvironment _environment;
+    /// <summary>Logger for use in AI operations.</summary>
+    private readonly ILogger _logger;
+
+    public CatalogAI(IWebHostEnvironment environment, ILogger<CatalogAI> logger, IEmbeddingGenerator<string, Embedding<float>> embeddingGenerator = null)
+    {
+        _embeddingGenerator = embeddingGenerator;
+        _environment = environment;
+        _logger = logger;
+    }
+
+    /// <inheritdoc/>
+    public bool IsEnabled => _embeddingGenerator is not null;
+
+    /// <inheritdoc/>
+    public ValueTask<Vector> GetEmbeddingAsync(CatalogItem item) =>
+        IsEnabled ?
+            GetEmbeddingAsync(CatalogItemToString(item)) :
+            ValueTask.FromResult<Vector>(null);
+
+    /// <inheritdoc/>
+    public async ValueTask<IReadOnlyList<Vector>> GetEmbeddingsAsync(IEnumerable<CatalogItem> items)
+    {
+        if (IsEnabled)
+        {
+            long timestamp = Stopwatch.GetTimestamp();
+
+            GeneratedEmbeddings<Embedding<float>> embeddings = await _embeddingGenerator.GenerateAsync(items.Select(CatalogItemToString));
+            var results = embeddings.Select(m => new Vector(m.Vector[0..EmbeddingDimensions])).ToList();
+
+            if (_logger.IsEnabled(LogLevel.Trace))
+            {
+                _logger.LogTrace("Generated {EmbeddingsCount} embeddings in {ElapsedMilliseconds}s", results.Count, Stopwatch.GetElapsedTime(timestamp).TotalSeconds);
+            }
+
+            return results;
+        }
+
+        return null;
+    }
+
+    /// <inheritdoc/>
+    public async ValueTask<Vector> GetEmbeddingAsync(string text)
+    {
+        if (IsEnabled)
+        {
+            long timestamp = Stopwatch.GetTimestamp();
+
+            var embedding = (await _embeddingGenerator.GenerateAsync(text))[0].Vector;
+            embedding = embedding[0..EmbeddingDimensions];
+
+            if (_logger.IsEnabled(LogLevel.Trace))
+            {
+                _logger.LogTrace("Generated embedding in {ElapsedMilliseconds}s: '{Text}'", Stopwatch.GetElapsedTime(timestamp).TotalSeconds, text);
+            }
+
+            return new Vector(embedding);
+        }
+
+        return null;
+    }
+
+    private static string CatalogItemToString(CatalogItem item) => $"{item.Name} {item.Description}";
+}
+```
+
 ## 14. Adding API Endpoints to Catalog.API for Catalog Functionality
 
 (Folder: Apis)
