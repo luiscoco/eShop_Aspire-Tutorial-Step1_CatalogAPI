@@ -122,6 +122,15 @@ We also Run the Application to confirm it properly work
 
 ## 5. Loading Required NuGet Packages for eShop.AppHost
 
+We right click on the **eShop.AppHost** project and select the menu option **Manage NuGet Packages**
+
+![image](https://github.com/user-attachments/assets/b0c427b2-14c9-43a1-823e-324ac3ae5a62)
+
+We load the **Aspire.Hosting.PostgreSQL** library
+
+![image](https://github.com/user-attachments/assets/4cf60735-cd8a-4a1a-9f43-d1abed573eb4)
+
+![image](https://github.com/user-attachments/assets/6bc525ab-93a5-4ea0-a85b-e2edfa0413a7)
 
 ## 6. Customizing Program.cs in eShop.AppHost
 
