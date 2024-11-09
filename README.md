@@ -1247,7 +1247,105 @@ public static class CatalogApi
 }
 ```
 
-## 15. Configuring Middleware for Catalog.API
+## 15. Configuring Middleware (Program.cs) for Catalog.API
+
+This code sets up an ASP.NET Core application, configuring services and middleware needed for handling requests
+
+It includes structured error handling, optional API versioning, and OpenAPI documentation (although currently commented out)
+
+The code is organized to keep service configuration flexible and allows for modular API versioning and OpenAPI support if needed in the future
+
+**Code explanation**:
+
+This line initializes the application’s builder object with configuration and dependency injection services. It sets up the necessary infrastructure for building the web app
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+```
+
+Presumably, this method configures some default services for the application. The actual implementation of AddServiceDefaults() is not shown, but it likely registers commonly used services and default configurations that the application needs
+
+```csharp
+builder.AddServiceDefaults();
+```
+
+This method likely registers specific application services required for the functionality of the app. Like the previous method, it abstracts the details of service setup.
+
+```csharp
+builder.AddApplicationServices();
+```
+
+This line adds support for returning standardized error details in HTTP responses, following the Problem Details standard. This is useful for consistent error handling and returning structured error information to clients
+
+```csharp
+builder.Services.AddProblemDetails();
+```
+
+This code would enable API versioning, allowing the API to support multiple versions
+
+```csharp
+builder.Services.AddApiVersioning();
+```
+
+This code would integrate OpenAPI/Swagger for generating API documentation, potentially with versioning support
+
+```csharp
+builder.AddDefaultOpenApi(withApiVersioning);: 
+```
+
+This builds the app with all the configured services and middleware, making it ready for handling requests
+
+```csharp
+var app = builder.Build();
+```
+
+Adds middleware to handle exceptions globally, likely showing a user-friendly error page or structured error response if an unhandled exception occurs
+
+```csharp
+app.UseExceptionHandler();
+```
+
+This maps default endpoints for the app. The specifics of MapDefaultEndpoints() are not shown, but this typically would map endpoints/routes based on controller or minimal API configurations
+
+```csharp
+app.MapDefaultEndpoints();
+```
+
+Maps an endpoint for CatalogApiV1. This makes the V1 version of the Catalog API accessible. The method MapCatalogApiV1() likely defines routes specifically for version 1 of the Catalog API
+
+```csharp
+app.MapCatalogApiV1();
+```
+
+This starts the web application and listens for incoming requests
+
+```csharp
+app.Run();
+```
+
+We review the whole code:
+
+**Program.cs**
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
+
+builder.AddApplicationServices();
+
+builder.Services.AddProblemDetails();
+
+var app = builder.Build();
+
+app.UseExceptionHandler();
+
+app.MapDefaultEndpoints();
+
+app.MapCatalogApiV1();
+
+app.Run();
+```
 
 ## 16. Adding Extensions for Enhanced Functionality in Catalog.API
 
