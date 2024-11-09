@@ -190,13 +190,35 @@ builder.Build().Run();
 
 ![image](https://github.com/user-attachments/assets/ed86891c-a04e-4868-8c78-e54cd24e0a4a)
 
-## 7. Create the Catalog.API project folders structure
+## 7. Add the Catalog.API project Nuget packages
+
+**Asp.Versioning.Http**:
+
+**Aspire.Azure.AI.OpenAI**:
+
+**Aspire.Npgsql.EntityFrameworkCore.PostgreSQL**:
+
+**Microsoft.EntityFrameworkCore.Tools**:
+
+**Microsoft.Extensions.AI**:
+
+**Microsoft.Extensions.AI.Ollama**:
+
+**Microsoft.Extensions.AI.OpenAI**:
+
+**Npgsql.EntityFrameworkCore.PostgreSQL**:
+
+**Pgvector**:
+
+**Pgvector.EntityFrameworkCore**:
+
+## 8. Create the Catalog.API project folders structure
 
 We create these folder inside the Catalog.API project: Apis, Extensions, Infrastructure, Model, Pics, Services and Setup
 
 ![image](https://github.com/user-attachments/assets/a65a12a7-3398-4e1d-97ff-14505ff58fd2)
 
-## 8. Adding Catalog Images to the Catalog.API Project
+## 9. Adding Catalog Images to the Catalog.API Project
 
 (Folder: Pics)
 
@@ -208,7 +230,7 @@ The **WebP** image file format is a modern image format developed by Google to o
 
 ![image](https://github.com/user-attachments/assets/274f8225-636b-47c9-aa3d-75e1203c3dc1)
 
-## 9. Setting Up Initial Database Data for Catalog.API
+## 10. Setting Up Initial Database Data for Catalog.API
 
 (Folder: Setup)
 
@@ -220,7 +242,7 @@ If we double click on the **catalog.json** file we can review the content
 
 ![image](https://github.com/user-attachments/assets/4f41bf69-bc17-4d63-9ec4-ece1600a3524)
 
-## 10. Creating Data Models and Configuring CatalogOptions in Catalog.API
+## 11. Creating Data Models and Configuring CatalogOptions in Catalog.API
 
 (Folder: Model, File: CatalogOptions.cs)
 
@@ -419,27 +441,27 @@ namespace eShop.Catalog.API.Model;
 public record PaginationRequest(int PageSize = 10, int PageIndex = 0);
 ```
 
-## 11. Building the CatalogContext for Data Handling in Catalog.API
+## 12. Building the CatalogContext for Data Handling in Catalog.API
 
 (Folder: Infrastructure)
 
-## 12. Implementing Core Services in Catalog.API
+## 13. Implementing Core Services in Catalog.API
 
 (Folder: Services)
 
-## 13. Adding API Endpoints to Catalog.API for Catalog Functionality
+## 14. Adding API Endpoints to Catalog.API for Catalog Functionality
 
 (Folder: Apis)
 
-## 14. Configuring Middleware for Catalog.API
+## 15. Configuring Middleware for Catalog.API
 
-## 15. Adding Extensions for Enhanced Functionality in Catalog.API
+## 16. Adding Extensions for Enhanced Functionality in Catalog.API
 
 (Folder: Extensions)
 
-## 16. Setting Up appsettings.json with Database Connection Details
+## 17. Setting Up appsettings.json with Database Connection Details
 
-## 17. Running the Application to View Initial Results
+## 18. Running the Application to View Initial Results
 
 
 
