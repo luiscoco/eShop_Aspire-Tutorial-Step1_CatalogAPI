@@ -134,6 +134,59 @@ We load the **Aspire.Hosting.PostgreSQL** library
 
 ## 6. Customizing Program.cs in eShop.AppHost
 
+With this code we are setting up a **PostgreSQL database** container with a custom image and linking it to a project in a development or testing environment
+
+**Initialize PostgreSQL Container**: we initializes a new PostgreSQL container named "postgres" using the builder object, which manage containerized services for the application
+
+```csharp
+var postgres = builder.AddPostgres("postgres")
+```
+
+We specify **Docker Image and Version**: specifies the Docker image to use for the PostgreSQL container. In this case, it uses the **ankane/pgvector** image, which is tailored for vector data (useful for machine learning and other complex data queries). We sets the version of the Docker image to the latest available tag
+
+```csharp
+.WithImage("ankane/pgvector")
+.WithImageTag("latest")
+```
+
+**Set Container Lifetime**: we configure the PostgreSQL container to have a persistent lifetime, meaning it will not be recreated each time the application runs
+
+```csharp
+.WithLifetime(ContainerLifetime.Persistent);
+```
+
+**Add Database to the PostgreSQL Container**: creates a new database within the PostgreSQL container named catalogdb for the application to use
+
+```csharp
+var catalogDb = postgres.AddDatabase("catalogdb");
+```
+
+**Add Project and Reference the Database**: sets up a project for the Catalog API, presumably an API service in the application. Links the catalogdb database to the catalog-api project, so the API can access and use the PostgreSQL database.
+
+```csharp
+var catalogApi = builder.AddProject<Projects.Catalog_API>("catalog-api")
+    .WithReference(catalogDb);
+```
+ 
+Overall, this code configures a PostgreSQL container with a custom image (pgvector), adds a database (catalogdb), and links it to the catalog-api service for seamless integration and usage
+
+We review the Program.cs (eShop.AppHost project) code:
+
+```csharp
+var builder = DistributedApplication.CreateBuilder(args);
+
+var postgres = builder.AddPostgres("postgres")
+    .WithImage("ankane/pgvector")
+    .WithImageTag("latest")
+    .WithLifetime(ContainerLifetime.Persistent);
+
+var catalogDb = postgres.AddDatabase("catalogdb");
+
+var catalogApi = builder.AddProject<Projects.Catalog_API>("catalog-api")
+    .WithReference(catalogDb);
+
+builder.Build().Run();
+```
 
 ## 7. Create the Catalog.API project folders structure
 
