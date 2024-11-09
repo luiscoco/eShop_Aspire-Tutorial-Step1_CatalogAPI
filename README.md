@@ -424,8 +424,18 @@ public class CatalogServices(
     public ICatalogAI CatalogAI { get; } = catalogAI;
     public IOptions<CatalogOptions> Options { get; } = options;
     public ILogger<CatalogServices> Logger { get; } = logger;
-    public ICatalogIntegrationEventService EventService { get; } = eventService;
+    //public ICatalogIntegrationEventService EventService { get; } = eventService;
 };
+```
+
+**IMPORTANT NOTE**: pay attention we comment these lines not in the scope of this examples, because ther are related to Events.
+
+```csharp
+ICatalogIntegrationEventService eventService
+```
+
+```csharp
+//public ICatalogIntegrationEventService EventService { get; } = eventService;
 ```
 
 **CatalogType.cs**
