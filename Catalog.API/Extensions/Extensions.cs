@@ -6,13 +6,18 @@ public static class Extensions
 {
     public static void AddApplicationServices(this IHostApplicationBuilder builder)
     {
-        builder.AddNpgsqlDbContext<CatalogContext>("catalogdb", configureDbContextOptions: dbContextOptionsBuilder =>
+        string? connectionString = builder.Configuration.GetConnectionString("DatabaseConnectionString");
+        if (string.IsNullOrEmpty(connectionString))
         {
-            dbContextOptionsBuilder.UseNpgsql(builder =>
+            throw new InvalidOperationException("Database connection string is missing from Azure App Service configuration.");
+        }
+
+        builder.Services.AddDbContext<CatalogContext>(options =>
+            options.UseNpgsql(connectionString, npgsqlOptions =>
             {
-                builder.UseVector();
-            });
-        });
+                npgsqlOptions.UseVector();
+            })
+        );
 
         // REVIEW: This is done for development ease but shouldn't be here in production
         builder.Services.AddMigration<CatalogContext, CatalogContextSeed>();
