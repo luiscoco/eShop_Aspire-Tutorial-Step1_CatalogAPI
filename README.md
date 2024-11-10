@@ -1949,9 +1949,11 @@ https://localhost:7384/api/catalog/items
 
 ![image](https://github.com/user-attachments/assets/6167e8f0-b060-47a8-abf8-d12117e1016e)
 
-## 21. (OPTINAL) Enhancing the Database Connection String Configuration
+## 21. (OPTINAL) Building 'eShop' from Zero to Hero: Optimizing Database Connection String Configuration
 
-This section guides developers through setting up and securing the **PostgreSQL Database Connection String** within the **eShop.AppHost** project
+This section guides developers through configuring and securing the **PostgreSQL Database Connection String** within the **eShop.AppHost** project
+
+Using the **eShop** solution as a foundation and drawing from the **CatalogAPI** sample, developers will learn best practices for setting up a secure, efficient connection to the database
 
 In the **eShop.AppHost** middleware we can define the PostgreSQL Database **UserName**, **Password** and running **PortNumber**
 
