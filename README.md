@@ -1951,7 +1951,7 @@ https://localhost:7384/api/catalog/items
 
 ## 21. (OPTINAL) Improvement in the Database ConnectionString
 
-We can set the connection string user name and password in the **eShop.AppHost** project
+We can set in the PostgreSQL Database Connection String the **UserName**, **Password** and running **PortNumber** in the **eShop.AppHost** project
 
 For this purpose we can proceed in this way: 
 
