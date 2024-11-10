@@ -1957,7 +1957,23 @@ In the **eShop.AppHost** middleware we can define the PostgreSQL Database **User
 
 For this purpose we can proceed in this way: 
 
-We modify the Program.cs file in the **eShop.AppHost** project
+**Program.cs Configuration**: Modify Program.cs to add parameters for PostgreSQL username, password, and port
+
+Specify the PostgreSQL image and configure it for persistence
+
+**Storing Sensitive Information**: Store the database username and password securely in the secrets.json file
+
+Defining Connection String in **appsettings.json**: Update the appsettings.json file to include a connection string that specifies the PostgreSQL host, port, database name, and login credentials
+
+Database Configuration in **Extensions.cs**: In Extensions.cs, retrieve the connection string from the configuration and verify its existence
+
+Configure the **CatalogContext with UseNpgsql** to connect to PostgreSQL using the connection string and enable vector support
+
+**Verification**: Run the application and verify that the PostgreSQL database configuration (username, password, and port) is correct
+
+Let's follow the above steps:
+
+We modify the **Program.cs** file in the **eShop.AppHost** project
 
 ```csharp
 var catalogdbusername = builder.AddParameter("postgres-username");
