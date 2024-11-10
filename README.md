@@ -1949,7 +1949,7 @@ https://localhost:7384/api/catalog/items
 
 ![image](https://github.com/user-attachments/assets/6167e8f0-b060-47a8-abf8-d12117e1016e)
 
-## 21. (OPTINAL) Improvement in the Database ConnectionString
+## 21. (OPTINAL) Enhancing the Database Connection String Configuration
 
 We can set in the PostgreSQL Database Connection String the **UserName**, **Password** and running **PortNumber** in the **eShop.AppHost** project
 
