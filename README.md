@@ -1949,3 +1949,65 @@ https://localhost:7384/api/catalog/items
 
 ![image](https://github.com/user-attachments/assets/6167e8f0-b060-47a8-abf8-d12117e1016e)
 
+## 21. (OPTINAL) Improvement in the Database ConnectionString
+
+We can set the connection string user name and password in the **eShop.AppHost** project
+
+For this purpose we can proceed in this way: 
+
+We modify the Program.cs file in the **eShop.AppHost** project
+
+```csharp
+var catalogdbusername = builder.AddParameter("postgres-username");
+var catalogdbpassword = builder.AddParameter("postgres-password");
+
+var postgres = builder.AddPostgres("postgres", catalogdbusername, catalogdbpassword, port: 5432)
+    .WithImage("ankane/pgvector")
+    .WithImageTag("latest")
+    .WithLifetime(ContainerLifetime.Persistent);
+```
+
+![image](https://github.com/user-attachments/assets/93f9b995-273b-43ab-a765-0ce1309ec048)
+
+We also have to store the database username and password in the **secrets.json** file
+
+```json
+{
+  "Parameters:postgres-username": "postgres",
+  "Parameters:postgres-password": "frCa1vdgjmNmmkwWymh"
+}
+```
+
+![image](https://github.com/user-attachments/assets/fd5ba0d9-2ee8-436b-9e48-90af5083a8da)
+
+We also have to modify the **appsettings.json** file to define the database connectionstring
+
+```json
+"ConnectionStrings": {
+"databaseconnectionstring": "Host=127.0.0.1;Port=5432;Database=catalogdb;Username=postgres;Password=frCa1vdgjmNmmkwWymh;Include Error Detail=true"
+}
+```
+
+Finally, we modify the **Extensions.cs** file and we include this code:
+
+```csharp
+string? connectionString = builder.Configuration.GetConnectionString("DatabaseConnectionString");
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("Database connection string is missing from Azure App Service configuration.");
+}
+
+builder.Services.AddDbContext<CatalogContext>(options =>
+    options.UseNpgsql(connectionString, npgsqlOptions =>
+    {
+        npgsqlOptions.UseVector();
+    })
+);
+```
+
+![image](https://github.com/user-attachments/assets/4387614f-6cea-4bf8-8a72-8577710221f1)
+
+We run the application and we verify the postgreSQL database username, password and port number
+
+![image](https://github.com/user-attachments/assets/eb3cf39f-73de-4230-89b4-06b050aa4cc0)
+
